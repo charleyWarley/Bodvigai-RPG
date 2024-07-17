@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1jtee0uqbmag"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_xm4of"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jvj1w"]
+radius = 8.0
+
+[node name="weapon" type="Node2D"]
+script = ExtResource("1_xm4of")
+target_name = "player"
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="collider" type="CollisionShape2D" parent="hitbox"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jvj1w")
+debug_color = Color(0, 0.568627, 0.85098, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="cooldown_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]

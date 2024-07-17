@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvew7d4sethpd"]
+
+[ext_resource type="Script" path="res://scripts/health_component.gd" id="1_p6ita"]
+
+[node name="health_component" type="Node"]
+script = ExtResource("1_p6ita")
+
+[node name="iframes_timer" type="Timer" parent="."]
+wait_time = 0.6
+
+[connection signal="timeout" from="iframes_timer" to="." method="_on_iframes_timer_timeout"]

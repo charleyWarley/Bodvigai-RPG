@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhf11rgbyx1fb"]
+
+[ext_resource type="Script" path="res://scripts/bgm_parser.gd" id="1_dlnd6"]
+[ext_resource type="Script" path="res://scripts/location_parser.gd" id="1_oulad"]
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bgm_parser" type="Node" parent="."]
+script = ExtResource("1_dlnd6")
+
+[node name="bgm1" type="AudioStreamPlayer" parent="bgm_parser"]
+
+[node name="bgm2" type="AudioStreamPlayer" parent="bgm_parser"]
+
+[node name="ambience1" type="AudioStreamPlayer" parent="bgm_parser"]
+
+[node name="ambience2" type="AudioStreamPlayer" parent="bgm_parser"]
+
+[node name="bgm4" type="AudioStreamPlayer" parent="bgm_parser"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+audio_listener_enable_2d = true
+render_target_update_mode = 4
+
+[node name="location_parser" type="Node2D" parent="SubViewportContainer/SubViewport"]
+script = ExtResource("1_oulad")
+
+[node name="load_timer" type="Timer" parent="SubViewportContainer/SubViewport"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="SubViewportContainer/SubViewport/load_timer" to="SubViewportContainer/SubViewport/location_parser" method="_on_load_timer_timeout"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://gmdiykls3b7r"]
+
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_fh0gg"]
+
+[node name="player_camera" type="Camera2D"]
+zoom = Vector2(3, 3)
+limit_smoothed = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.4
+drag_top_margin = 0.4
+drag_right_margin = 0.4
+drag_bottom_margin = 0.4
+script = ExtResource("1_fh0gg")
