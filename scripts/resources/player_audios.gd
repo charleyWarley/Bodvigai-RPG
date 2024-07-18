@@ -31,5 +31,5 @@ var voices := {
 	}
 
 var sfxs := {
-	
+	"walk_grass1": "res://audio/sfx/squoosh_sound.wav"
 }

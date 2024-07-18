@@ -36,5 +36,6 @@ func animate_walk(horizontal_input, vertical_input):
 	elif vertical_input == -1: sprite.play("walk_up")
 
 
-func _on_weapon_attack_state_chanaged(_is_attacking: bool):
+func _on_weapon_attack_state_changed(_is_attacking: bool):
 	is_attacking = _is_attacking
+	

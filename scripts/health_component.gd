@@ -27,11 +27,22 @@ func take_damage(attack: Attack) -> float:
 	var parent = get_parent()
 	if current_health <= 0:
 		if parent.has_method("die"): parent.die()
-		else: sprite.play("take_damage")
+		else: animate_damage()
 		return current_health
-	sprite.play("take_damage")
+	animate_damage()
 	print(parent.name + " taking damage")
 	sprite.self_modulate = Color("ffffff78")
 	is_invincible = true
 	iframes_timer.start()
 	return current_health
+
+
+func animate_damage():
+	randomize()
+	var random_index = randi_range(1, 11)
+	var target = get_parent()
+	if target.is_in_group("enemies") or target.is_in_group("players"):
+		target.check_audio("pain" + str(random_index), true)
+	else:
+		target.check_audio("break", false)
+	sprite.play("take_damage")

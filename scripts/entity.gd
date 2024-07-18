@@ -33,6 +33,7 @@ func check_flip():
 
 
 func die():
+	print("entity died")
 	is_alive = false
 	sprite.play("death")
 	var random_index  = randi_range(1, 11)
@@ -41,22 +42,21 @@ func die():
 
 func check_audio(audio: String, is_voice: bool):
 	#set the audio stream player for the audio
-	var audio_player : AudioStreamPlayer = null
+	var audio_player : AudioStreamPlayer2D = null
 	if is_voice: 
 		if !audios.voices.has(audio): return #if the audio doesn't exist, exit method
 		audio_player = voice
 	else:
 		if !audios.sfxs.has(audio): return #if the audio doesn't exist, exit method
-		if sfx1.playing: audio_player = sfx2 #if sfx1 is playing, overlap and play audio on sfx2
-		else: audio_player = sfx1 #if it's not playing, play audio on sfx1
+		if sfx1.playing: audio_player = sfx2 #if sfx1 is playing, set player to sfx2 to allow overlap with minimal cutoff
+		else: audio_player = sfx1 #if it's not playing, set player to sfx1
 	play_audio(audio, audio_player)
 
 
-func play_audio(audio: String, audio_player: AudioStreamPlayer):
+func play_audio(audio: String, audio_player: AudioStreamPlayer2D):
 	var audio_path := ""
 	if audio_player == voice: audio_path = audios.voices[audio]
-	else: audio_path = audios.sfx[audio]
-	print(audio_path)
+	else: audio_path = audios.sfxs[audio]
 	audio_player.set_stream(load(audio_path))
 	audio_player.play()
 	

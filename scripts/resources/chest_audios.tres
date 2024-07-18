@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bsc2i8fym5sa6"]
+
+[ext_resource type="Script" path="res://scripts/resources/chest_audios.gd" id="1_8vb41"]
+
+[resource]
+script = ExtResource("1_8vb41")

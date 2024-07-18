@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxg8x48gb1xnl"]
+[gd_scene load_steps=14 format=3 uid="uid://dxg8x48gb1xnl"]
 
 [ext_resource type="Script" path="res://scripts/breakable_object.gd" id="1_0p8jr"]
 [ext_resource type="Texture2D" uid="uid://blfgg5va75yu5" path="res://images/chest_01.png" id="2_gsh2c"]
+[ext_resource type="Resource" uid="uid://bsc2i8fym5sa6" path="res://scripts/resources/chest_audios.tres" id="2_vd7xc"]
 [ext_resource type="PackedScene" uid="uid://dvew7d4sethpd" path="res://scenes/characters/health_component.tscn" id="3_khceh"]
 [ext_resource type="PackedScene" uid="uid://c66nvo4oy2dxe" path="res://scenes/characters/hitbox_component.tscn" id="4_5fa8j"]
 
@@ -61,6 +62,7 @@ size = Vector2(14, 6)
 
 [node name="breakable_object" type="StaticBody2D" groups=["attackable"]]
 script = ExtResource("1_0p8jr")
+audios = ExtResource("2_vd7xc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -81,3 +83,7 @@ shape = SubResource("RectangleShape2D_gao2i")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_ttqvo")
+
+[node name="sfx1" type="AudioStreamPlayer2D" parent="."]
+
+[node name="sfx2" type="AudioStreamPlayer2D" parent="."]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://bar0du7fkytf3"]
 
-[ext_resource type="Script" path="res://scripts/resources/player_audios.gd" id="1_aer33"]
+[ext_resource type="Script" path="res://scripts/resources/player_audios.gd" id="1_0l0ld"]
 
 [resource]
-script = ExtResource("1_aer33")
+script = ExtResource("1_0l0ld")

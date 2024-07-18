@@ -1,6 +1,7 @@
-[gd_scene load_steps=70 format=3 uid="uid://bs57i3x3e1ugm"]
+[gd_scene load_steps=71 format=3 uid="uid://bs57i3x3e1ugm"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_l61ww"]
+[ext_resource type="Resource" uid="uid://bar0du7fkytf3" path="res://scripts/resources/player_audios.tres" id="2_fhm6p"]
 [ext_resource type="PackedScene" uid="uid://c1jtee0uqbmag" path="res://scenes/characters/weapon.tscn" id="2_mnids"]
 [ext_resource type="Texture2D" uid="uid://dqrtpc4tcgkk4" path="res://images/slime.png" id="2_s0e34"]
 [ext_resource type="PackedScene" uid="uid://gmdiykls3b7r" path="res://scenes/player_camera.tscn" id="3_2f5xa"]
@@ -502,6 +503,7 @@ z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_l61ww")
 weapon = NodePath("weapon")
+audios = ExtResource("2_fhm6p")
 
 [node name="player_camera" parent="." instance=ExtResource("3_2f5xa")]
 
@@ -536,11 +538,12 @@ frame = 2
 frame_progress = 1.0
 offset = Vector2(0, -6)
 
-[node name="voice" type="AudioStreamPlayer" parent="."]
+[node name="voice" type="AudioStreamPlayer2D" parent="."]
 pitch_scale = 2.01
 
-[node name="sfx1" type="AudioStreamPlayer" parent="."]
+[node name="sfx1" type="AudioStreamPlayer2D" parent="."]
 
-[node name="sfx2" type="AudioStreamPlayer" parent="."]
+[node name="sfx2" type="AudioStreamPlayer2D" parent="."]
 
+[connection signal="attack_state_changed" from="weapon" to="." method="_on_weapon_attack_state_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

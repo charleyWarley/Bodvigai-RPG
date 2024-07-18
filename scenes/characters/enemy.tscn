@@ -1,8 +1,9 @@
-[gd_scene load_steps=56 format=3 uid="uid://dc5dbogeibtw0"]
+[gd_scene load_steps=57 format=3 uid="uid://dc5dbogeibtw0"]
 
 [ext_resource type="Texture2D" uid="uid://ctsfo32hnry51" path="res://images/player.png" id="1_4x6u3"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_j3tks"]
 [ext_resource type="PackedScene" uid="uid://dvew7d4sethpd" path="res://scenes/characters/health_component.tscn" id="2_c2oqf"]
+[ext_resource type="Resource" uid="uid://cgh3r8wlqnhuo" path="res://scripts/resources/enemy_audios.tres" id="2_cdipg"]
 [ext_resource type="PackedScene" uid="uid://c1jtee0uqbmag" path="res://scenes/characters/weapon.tscn" id="3_i3hra"]
 [ext_resource type="PackedScene" uid="uid://c66nvo4oy2dxe" path="res://scenes/characters/hitbox_component.tscn" id="3_xj7o4"]
 
@@ -406,6 +407,7 @@ z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_j3tks")
 weapon = NodePath("weapon")
+audios = ExtResource("2_cdipg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
