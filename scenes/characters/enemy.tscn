@@ -447,6 +447,7 @@ debug_color = Color(0.439216, 0.737255, 0.184314, 0.419608)
 
 [node name="sfx2" type="AudioStreamPlayer2D" parent="."]
 
+[connection signal="attack_state_changed" from="weapon" to="." method="_on_weapon_attack_state_changed"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]

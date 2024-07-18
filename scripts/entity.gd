@@ -21,8 +21,9 @@ func _on_animated_sprite_2d_animation_looped():
 		is_attacking = false
 
 
-func _ready():
-	print("bitch")
+func _on_weapon_attack_state_changed(_is_attacking: bool):
+	#update is_attacking variable if the weapon compoenet has started or stopped attacking
+	is_attacking = _is_attacking
 
 
 func check_flip():
@@ -54,9 +55,22 @@ func check_audio(audio: String, is_voice: bool):
 
 
 func play_audio(audio: String, audio_player: AudioStreamPlayer2D):
-	var audio_path := ""
+	var audio_path := "" #create path variable for the audio stream path
+	#set the audio path from the audios resource
 	if audio_player == voice: audio_path = audios.voices[audio]
 	else: audio_path = audios.sfxs[audio]
+	#set the audio stream in the audio player and play audio
 	audio_player.set_stream(load(audio_path))
 	audio_player.play()
 	
+
+func animate(action: String):
+	var _direction := "" #create the direction string for the end of the animation string
+	#set the direction string based on the direction of the entity
+	if direction.x != 0: _direction = "_side"
+	elif direction.y == 1: _direction = "_down"
+	elif direction.y == -1: _direction = "_up"
+	#create the animation string and play the animation on the animated sprite of the entity if that animation isn't already playing
+	var animation = action + _direction
+	if animation == sprite.animation: return
+	sprite.play(animation)

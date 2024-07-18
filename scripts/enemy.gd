@@ -52,7 +52,7 @@ func chase_player():
 	var target_position = player.position - position
 	direction = Vector2(sign(target_position.x), sign(target_position.y))
 	position += target_position / speed
-	sprite.play("walk_side")
+	animate("walk")
 
 
 func go_home():
@@ -61,13 +61,7 @@ func go_home():
 		direction = Vector2(sign(target_position.x), sign(target_position.y))
 		position += target_position / speed
 		return
-	if direction.x == 1:
-		sprite.play("idle_side")
-		sprite.flip_h = false
-	elif direction.x == -1:
-		sprite.play("idle_side")
-		sprite.flip_h = true
-	elif direction.y == 1:
-		sprite.play("idle_down")
-	elif direction.y == -1:
-		sprite.play("idle_up")
+	animate("idle")
+
+
+
