@@ -2,66 +2,84 @@ extends Entity
 
 var player = null
 var home := Vector2.ZERO
-var can_attack := false
+var min_distance := Vector2(1, 20)
+var is_chasing := false
+
 
 func _on_detection_area_body_entered(body):
 	if body.name == "player" and is_alive:
 		player = body
+		is_chasing = true
 
 
 func _on_detection_area_body_exited(body):
 	if body.name == "player":
 		player = null
+		is_chasing = false
 
 
 func _ready():
-	if !is_alive: return
+	if !is_alive: 
+		is_chasing = false
+		return
 	home = position
 	randomize()
-	var random_direction = randi_range(1, 3)
+	var random_direction = randi_range(1, 2)
 	match random_direction:
-		1: sprite.play("idle_down")
-		2: sprite.play("idle_up")
-		3: sprite.play("idle_side")
+		1: direction = Vector2.DOWN
+		2: direction = Vector2.UP
 	randomize()
 	random_direction = randi_range(1, 2)
 	match random_direction:
 		1: sprite.flip_h = false
 		2: sprite.flip_h = true
+	check_flip()
 
 
-func _physics_process(_delta):
-	if !is_alive: return
-	if player == null: return
-	if weapon.is_attacking: return
-	apply_movement()
+func _physics_process(delta):
+	#if the enemy isn't alive, has no target, or is attacking, exit method
+	if (
+		!is_alive or 
+		weapon.is_attacking
+		): 
+			return 
+	check_movement(delta)
 	check_flip()
 	move_and_slide()
 
 
-func apply_movement():
-	if player == null: 
-		go_home()
-		return
-	if player.is_alive: chase_player()
+func check_movement(delta):
+	if weapon.can_attack: return
+	if !is_chasing: 
+			go_home(delta)
+			return
+	if player == null: return
+	if player.is_alive: chase_player(delta)
 	else: player = null
 
 
-func chase_player():
+func chase_player(delta):
 	if is_attacking: return
-	var target_position = player.position - position
-	direction = Vector2(sign(target_position.x), sign(target_position.y))
-	position += target_position / speed
-	animate("walk")
+	var target_distance = position.distance_to(player.position)
+	if target_distance > min_distance.length():
+		check_animation("walk", false)
+		check_audio("walk", false)
+		var target_direction = position.direction_to(player.position)
+		velocity = target_direction * speed * delta
+	else:
+		check_animation("idle", false)
+	direction = Vector2(sign(velocity.x), sign(velocity.y))
+	
 
-
-func go_home():
+func go_home(delta):
+	if weapon.is_attacking or weapon.can_attack:
+		weapon.is_attacking = false
+		weapon.can_attack = false
 	if position != home:
-		var target_position = home - position
-		direction = Vector2(sign(target_position.x), sign(target_position.y))
-		position += target_position / speed
+		var target_direction = position.direction_to(home)
+		direction = Vector2(sign(target_direction.x), sign(target_direction.y))
+		velocity = target_direction * speed * delta
+		check_animation("walk", false)
+		check_audio("walk", false)
 		return
-	animate("idle")
-
-
-
+	check_animation("idle", false)

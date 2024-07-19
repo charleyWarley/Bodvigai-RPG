@@ -1,20 +1,48 @@
 extends StaticBody2D
+class_name BreakableObject
 
 @export var audios : Resource
 @onready var sfx1 := $sfx1
 @onready var sfx2 := $sfx2
-
-func check_audio(audio: String, is_voice: bool):
-	#set the audio stream player for the audio
-	var audio_player : AudioStreamPlayer2D = null
-	if !audios.sfxs.has(audio): return #if the audio doesn't exist, exit method
-	if sfx1.playing: audio_player = sfx2 #if sfx1 is playing, set player to sfx2 to allow overlap with minimal cutoff
-	else: audio_player = sfx1 #if it's not playing, set player to sfx1
-	play_audio(audio, audio_player)
+@onready var sprite := $AnimatedSprite2D
+@export var animations : Resource
 
 
-func play_audio(audio: String, audio_player: AudioStreamPlayer2D):
-	var audio_path := ""
-	audio_path = audios.sfxs[audio]
-	audio_player.set_stream(load(audio_path))
+func _ready():
+	check_animation("idle")
+
+
+func check_animation(action: String):
+	#if the animation is already playing, exit method
+	print("checking animation")
+	if action == sprite.animation: return
+	var animation = action
+	if animations.list.has(animation):
+		animate(action, animation)
+
+
+func animate(action: String, animation: String):
+	print("animating ", animation)
+	sprite.play(animation)
+	check_audio(action)
+
+
+func check_audio(audio: String):
+	var audio_type = audios.sfxs
+	#set the audio stream player for the audio 
+	var audio_player : AudioStreamPlayer2D
+	if !audio_type.has(audio): return #if the audio doesn't exist, exit method
+	#set audio player according to which one isn't playing
+	if sfx1.playing: audio_player = sfx2 
+	else: audio_player = sfx1
+	#move on to the play audio method
+	play_audio(audio, audio_player, audio_type)
+
+
+func play_audio(audio: String, audio_player: AudioStreamPlayer2D, audio_type: Dictionary):
+	var audio_path := "" #create the audio stream path
+	audio_path = audio_type[audio] #set the audio path from the sfxs dictionary of the audios resource
+	print(audio_path)
+	#set the audio stream of the audio player and play audio
+	audio_player.set_stream(load(audio_path)) 
 	audio_player.play()

@@ -1,17 +1,18 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
-[ext_resource type="Script" path="res://scripts/location.gd" id="1_ptki1"]
-[ext_resource type="PackedScene" uid="uid://dc5dbogeibtw0" path="res://scenes/characters/enemy.tscn" id="2_e1y13"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="3_43q8b"]
-[ext_resource type="Resource" uid="uid://cgh3r8wlqnhuo" path="res://scripts/resources/enemy_audios.tres" id="4_6llnr"]
-[ext_resource type="PackedScene" uid="uid://dbcslcv6jyeay" path="res://scenes/locations/tile_map.tscn" id="5_77381"]
-[ext_resource type="Texture2D" uid="uid://c4nuc7pbt1rxx" path="res://images/objects.png" id="6_h4x1s"]
-[ext_resource type="Texture2D" uid="uid://dp5aw1380lsai" path="res://images/plains.png" id="7_u5m53"]
-[ext_resource type="Texture2D" uid="uid://dpkq17dtx71or" path="res://images/grass.png" id="8_glosb"]
-[ext_resource type="Script" path="res://scripts/transition_area.gd" id="9_ptw2u"]
+[ext_resource type="Script" path="res://scripts/location.gd" id="1_8j5q8"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemy.tscn" id="2_xg0gf"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="3_sov1i"]
+[ext_resource type="Resource" path="res://scripts/resources/enemy_audios.tres" id="4_xobtg"]
+[ext_resource type="Resource" path="res://scripts/resources/enemy_animations.tres" id="5_c8ipd"]
+[ext_resource type="PackedScene" path="res://scenes/locations/tile_map.tscn" id="6_xik5j"]
+[ext_resource type="Texture2D" path="res://images/objects.png" id="7_y1puw"]
+[ext_resource type="Texture2D" path="res://images/plains.png" id="8_uipvx"]
+[ext_resource type="Texture2D" path="res://images/grass.png" id="9_nes1f"]
+[ext_resource type="Script" path="res://scripts/transition_area.gd" id="10_yl651"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8s81"]
-texture = ExtResource("6_h4x1s")
+texture = ExtResource("7_y1puw")
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
 0:5/0/y_sort_origin = 13
@@ -64,7 +65,7 @@ texture = ExtResource("6_h4x1s")
 11:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4528o"]
-texture = ExtResource("7_u5m53")
+texture = ExtResource("8_uipvx")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -271,7 +272,7 @@ texture = ExtResource("7_u5m53")
 5:11/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtauw"]
-texture = ExtResource("8_glosb")
+texture = ExtResource("9_nes1f")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -290,7 +291,7 @@ size = Vector2(52, 119)
 
 [node name="location_northwest" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_ptki1")
+script = ExtResource("1_8j5q8")
 left_limit = -333
 right_limit = 195
 top_limit = -129
@@ -299,16 +300,18 @@ bottom_limit = 174
 [node name="start_position" type="Node2D" parent="."]
 position = Vector2(150, 144)
 
-[node name="enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_e1y13")]
+[node name="enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_xg0gf")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(68.8121, 31.4031)
-script = ExtResource("3_43q8b")
+position = Vector2(64.046, 32.6594)
+velocity = Vector2(2.8026e-45, 0)
+script = ExtResource("3_sov1i")
 weapon = NodePath("weapon")
-sounds = ExtResource("4_6llnr")
-speed = 250
+audios = ExtResource("4_xobtg")
+speed = 1000
+animations = ExtResource("5_c8ipd")
 
-[node name="TileMap" type="TileMap" parent="." instance=ExtResource("5_77381")]
+[node name="TileMap" type="TileMap" parent="." instance=ExtResource("6_xik5j")]
 y_sort_enabled = true
 position = Vector2(-77, 47)
 tile_set = SubResource("TileSet_23ynl")
@@ -330,7 +333,7 @@ visible = false
 polygon = PackedVector2Array(-236, -68, -238, 31, -197, 35, -192, 131, -165, 131, -160, 173, -39, 174, -39, 211, 198, 212, 196, 174, 245, 174, 236, 54, 195.199, 55.4178, 195, 26, 154, 29, 150, -69, -231, -67, -335, -129, 238, -129, 279, 226, -42, 234, -358, 196, -352, -137)
 
 [node name="transition_area" type="Area2D" parent="."]
-script = ExtResource("9_ptw2u")
+script = ExtResource("10_yl651")
 destination_key = "location_center"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="transition_area"]

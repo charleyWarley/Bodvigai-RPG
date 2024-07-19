@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ceiar88gy4t0c"]
+
+[ext_resource type="Script" path="res://scripts/resources/enemy_animations.gd" id="1_o5nvj"]
+
+[resource]
+script = ExtResource("1_o5nvj")

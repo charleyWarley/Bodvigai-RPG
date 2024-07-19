@@ -1,10 +1,11 @@
-[gd_scene load_steps=57 format=3 uid="uid://dc5dbogeibtw0"]
+[gd_scene load_steps=59 format=3 uid="uid://dc5dbogeibtw0"]
 
 [ext_resource type="Texture2D" uid="uid://ctsfo32hnry51" path="res://images/player.png" id="1_4x6u3"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_j3tks"]
 [ext_resource type="PackedScene" uid="uid://dvew7d4sethpd" path="res://scenes/characters/health_component.tscn" id="2_c2oqf"]
 [ext_resource type="Resource" uid="uid://cgh3r8wlqnhuo" path="res://scripts/resources/enemy_audios.tres" id="2_cdipg"]
 [ext_resource type="PackedScene" uid="uid://c1jtee0uqbmag" path="res://scenes/characters/weapon.tscn" id="3_i3hra"]
+[ext_resource type="Resource" uid="uid://ceiar88gy4t0c" path="res://scripts/resources/enemy_animations.tres" id="3_wrbni"]
 [ext_resource type="PackedScene" uid="uid://c66nvo4oy2dxe" path="res://scenes/characters/hitbox_component.tscn" id="3_xj7o4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8qnkc"]
@@ -29,6 +30,10 @@ region = Rect2(96, 288, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4b8lu"]
 atlas = ExtResource("1_4x6u3")
 region = Rect2(144, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xw528"]
+atlas = ExtResource("1_4x6u3")
+region = Rect2(144, 336, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i80j7"]
 atlas = ExtResource("1_4x6u3")
@@ -219,6 +224,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_xw528")
+}],
+"loop": true,
+"name": &"attack_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_i80j7")
 }, {
 "duration": 1.0,
@@ -270,7 +283,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_uqnil")
 }],
 "loop": false,
-"name": &"death",
+"name": &"die",
 "speed": 5.0
 }, {
 "frames": [{
@@ -408,6 +421,8 @@ y_sort_enabled = true
 script = ExtResource("1_j3tks")
 weapon = NodePath("weapon")
 audios = ExtResource("2_cdipg")
+speed = 1000
+animations = ExtResource("3_wrbni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -415,7 +430,6 @@ shape = SubResource("CircleShape2D_8qnkc")
 debug_color = Color(0.756863, 0.454902, 0, 0.419608)
 
 [node name="health_component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_c2oqf")]
-max_health = 3.0
 sprite = NodePath("../AnimatedSprite2D")
 
 [node name="weapon" parent="." instance=ExtResource("3_i3hra")]
@@ -431,7 +445,7 @@ debug_color = Color(0.960784, 0.0745098, 0.462745, 0.419608)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lsx55")
-animation = &"idle_down"
+animation = &"attack_idle"
 offset = Vector2(0, -16)
 
 [node name="detection_area" type="Area2D" parent="."]

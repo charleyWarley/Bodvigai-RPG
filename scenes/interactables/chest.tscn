@@ -1,29 +1,30 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxg8x48gb1xnl"]
+[gd_scene load_steps=15 format=3 uid="uid://drnrv6dlgv787"]
 
-[ext_resource type="Script" path="res://scripts/breakable_object.gd" id="1_0p8jr"]
-[ext_resource type="Texture2D" uid="uid://blfgg5va75yu5" path="res://images/chest_01.png" id="2_gsh2c"]
-[ext_resource type="Resource" uid="uid://bsc2i8fym5sa6" path="res://scripts/resources/chest_audios.tres" id="2_vd7xc"]
-[ext_resource type="PackedScene" uid="uid://dvew7d4sethpd" path="res://scenes/characters/health_component.tscn" id="3_khceh"]
-[ext_resource type="PackedScene" uid="uid://c66nvo4oy2dxe" path="res://scenes/characters/hitbox_component.tscn" id="4_5fa8j"]
+[ext_resource type="Script" path="res://scripts/chest.gd" id="1_hu8s4"]
+[ext_resource type="Resource" uid="uid://bsc2i8fym5sa6" path="res://scripts/resources/chest_audios.tres" id="2_8xyhp"]
+[ext_resource type="Texture2D" uid="uid://blfgg5va75yu5" path="res://images/chest_01.png" id="2_hf8tu"]
+[ext_resource type="PackedScene" uid="uid://dvew7d4sethpd" path="res://scenes/characters/health_component.tscn" id="3_1d665"]
+[ext_resource type="Resource" uid="uid://ccce55xo8l4ki" path="res://scripts/resources/chest_animations.tres" id="3_38foh"]
+[ext_resource type="PackedScene" uid="uid://c66nvo4oy2dxe" path="res://scenes/characters/hitbox_component.tscn" id="4_cyhls"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mv4rx"]
-atlas = ExtResource("2_gsh2c")
+atlas = ExtResource("2_hf8tu")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w3wst"]
-atlas = ExtResource("2_gsh2c")
+atlas = ExtResource("2_hf8tu")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_67oq8"]
-atlas = ExtResource("2_gsh2c")
+atlas = ExtResource("2_hf8tu")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3d0ig"]
-atlas = ExtResource("2_gsh2c")
+atlas = ExtResource("2_hf8tu")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_orv6a"]
-atlas = ExtResource("2_gsh2c")
+atlas = ExtResource("2_hf8tu")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mhgqy"]
@@ -60,20 +61,23 @@ size = Vector2(16, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ttqvo"]
 size = Vector2(14, 6)
 
-[node name="breakable_object" type="StaticBody2D" groups=["attackable"]]
-script = ExtResource("1_0p8jr")
-audios = ExtResource("2_vd7xc")
+[node name="chest" type="StaticBody2D" groups=["attackable", "chests", "objects"]]
+z_index = 1
+script = ExtResource("1_hu8s4")
+audios = ExtResource("2_8xyhp")
+animations = ExtResource("3_38foh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_mhgqy")
-animation = &"take_damage"
+animation = &"idle"
 
-[node name="health_component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_khceh")]
-max_health = 1.0
+[node name="health_component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_1d665")]
+max_health = 2
+iframes_range = Vector2(0.1, 0.2)
 sprite = NodePath("../AnimatedSprite2D")
 
-[node name="hitbox_component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_5fa8j")]
+[node name="hitbox_component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_cyhls")]
 health_component = NodePath("../health_component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]

@@ -25,11 +25,13 @@ script = ExtResource("1_dlnd6")
 [node name="bgm4" type="AudioStreamPlayer" parent="bgm_parser"]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 audio_listener_enable_2d = true

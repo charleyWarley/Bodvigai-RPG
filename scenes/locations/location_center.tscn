@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://c4nuc7pbt1rxx" path="res://images/objects.png" id="3_lwxkc"]
 [ext_resource type="Texture2D" uid="uid://dpkq17dtx71or" path="res://images/grass.png" id="4_22uf7"]
 [ext_resource type="PackedScene" uid="uid://dc5dbogeibtw0" path="res://scenes/characters/enemy.tscn" id="5_6882g"]
+[ext_resource type="PackedScene" uid="uid://drnrv6dlgv787" path="res://scenes/interactables/chest.tscn" id="6_ekqt6"]
 [ext_resource type="Script" path="res://scripts/transition_area.gd" id="6_jwscy"]
-[ext_resource type="PackedScene" uid="uid://dxg8x48gb1xnl" path="res://scenes/breakable_object.tscn" id="7_gk44r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ey1l0"]
 texture = ExtResource("2_74sk4")
@@ -225,22 +225,22 @@ top_limit = -97
 bottom_limit = 239
 
 [node name="start_position" type="Node2D" parent="."]
-position = Vector2(-91, 28)
+position = Vector2(-167, 160)
 
 [node name="enemy" parent="." instance=ExtResource("5_6882g")]
 position = Vector2(-306, 177)
 
 [node name="enemy5" parent="." instance=ExtResource("5_6882g")]
-position = Vector2(-367, 181)
+position = Vector2(-361, -34)
 
 [node name="enemy2" parent="." instance=ExtResource("5_6882g")]
-position = Vector2(-265, 105)
+position = Vector2(-236, -24)
 
 [node name="enemy3" parent="." instance=ExtResource("5_6882g")]
-position = Vector2(-233, 138)
+position = Vector2(-295, -22)
 
 [node name="enemy4" parent="." instance=ExtResource("5_6882g")]
-position = Vector2(-358, 48)
+position = Vector2(-329, -81)
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -257,9 +257,11 @@ layer_2/y_sort_enabled = true
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array(-589816, 2, 5, -655356, 2, 5, -393208, 2, 5, -458746, 2, 5, -720896, 2, 5, -655368, 2, 5, -655364, 2, 5, 9, 2, 5, 327689, 2, 5, 655369, 2, 5, -196603, 524290, 6, 3, 524290, 6, -458751, 524290, 6, -327682, 524290, 6, -458758, 524290, 6, 327679, 524290, 6, 262127, 393218, 7, -65547, 393218, 7, -196608, 655362, 7, 655352, 2, 1, 589827, 2, 0, 458755, 655362, 7, 720898, 393218, 7, 786432, 393218, 7, 851966, 393218, 7, 851964, 393218, 7, 851962, 393218, 7, 851960, 393218, 7, 786422, 2, 5, 851956, 2, 5, 786418, 2, 5, 851952, 2, 5, 786414, 2, 5, 851948, 2, 5, 786411, 393218, 7, 655339, 393218, 7, 327660, 655362, 7, 262123, 655362, 7, 458731, 655362, 7, 589803, 655362, 7, 131051, 655362, 7, 65516, 655362, 7, -65556, 655362, 7)
 
-[node name="breakable_object" parent="." instance=ExtResource("7_gk44r")]
-z_index = 1
-position = Vector2(-97, 0)
+[node name="chest" parent="." instance=ExtResource("6_ekqt6")]
+position = Vector2(-68, 26)
+
+[node name="chest2" parent="." instance=ExtResource("6_ekqt6")]
+position = Vector2(5, 163)
 
 [node name="boundaries" type="StaticBody2D" parent="."]
 

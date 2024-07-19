@@ -1,10 +1,11 @@
-[gd_scene load_steps=71 format=3 uid="uid://bs57i3x3e1ugm"]
+[gd_scene load_steps=75 format=3 uid="uid://bs57i3x3e1ugm"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_l61ww"]
 [ext_resource type="Resource" uid="uid://bar0du7fkytf3" path="res://scripts/resources/player_audios.tres" id="2_fhm6p"]
 [ext_resource type="PackedScene" uid="uid://c1jtee0uqbmag" path="res://scenes/characters/weapon.tscn" id="2_mnids"]
 [ext_resource type="Texture2D" uid="uid://dqrtpc4tcgkk4" path="res://images/slime.png" id="2_s0e34"]
 [ext_resource type="PackedScene" uid="uid://gmdiykls3b7r" path="res://scenes/player_camera.tscn" id="3_2f5xa"]
+[ext_resource type="Resource" uid="uid://c15rg24cm2b8i" path="res://scripts/resources/player_animations.tres" id="3_c2k2n"]
 [ext_resource type="PackedScene" uid="uid://c66nvo4oy2dxe" path="res://scenes/characters/hitbox_component.tscn" id="4_r8kqf"]
 [ext_resource type="PackedScene" uid="uid://dvew7d4sethpd" path="res://scenes/characters/health_component.tscn" id="5_pu128"]
 
@@ -42,6 +43,18 @@ region = Rect2(160, 192, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbpv0"]
 atlas = ExtResource("2_s0e34")
 region = Rect2(192, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d1j4"]
+atlas = ExtResource("2_s0e34")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b22s2"]
+atlas = ExtResource("2_s0e34")
+region = Rect2(160, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0d5x"]
+atlas = ExtResource("2_s0e34")
+region = Rect2(192, 224, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0nrg"]
 atlas = ExtResource("2_s0e34")
@@ -285,6 +298,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_2d1j4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b22s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0d5x")
+}],
+"loop": true,
+"name": &"attack_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q0nrg")
 }, {
 "duration": 1.0,
@@ -360,7 +387,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_c1m4b")
 }],
 "loop": false,
-"name": &"death",
+"name": &"die",
 "speed": 7.0
 }, {
 "frames": [{
@@ -504,11 +531,12 @@ y_sort_enabled = true
 script = ExtResource("1_l61ww")
 weapon = NodePath("weapon")
 audios = ExtResource("2_fhm6p")
+speed = 3500
+animations = ExtResource("3_c2k2n")
 
 [node name="player_camera" parent="." instance=ExtResource("3_2f5xa")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = 1
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_tfshg")
 debug_color = Color(0.807843, 0.411765, 0.00392157, 0.419608)
@@ -516,27 +544,26 @@ debug_color = Color(0.807843, 0.411765, 0.00392157, 0.419608)
 [node name="weapon" parent="." instance=ExtResource("2_mnids")]
 target_name = "enemy"
 cooldown_time = 0.4
+attack_damage = 3
 
 [node name="hitbox_component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_r8kqf")]
 health_component = NodePath("../health_component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]
-z_index = 1
 position = Vector2(0, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_3fr5h")
 debug_color = Color(0.988235, 0, 0.309804, 0.419608)
 
-[node name="health_component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_pu128")]
-sprite = NodePath("../AnimatedSprite2D")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_07wwa")
-animation = &"take_damage"
-frame = 2
-frame_progress = 1.0
+animation = &"attack_idle"
+frame_progress = 0.811386
 offset = Vector2(0, -6)
+
+[node name="health_component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_pu128")]
+sprite = NodePath("../AnimatedSprite2D")
 
 [node name="voice" type="AudioStreamPlayer2D" parent="."]
 pitch_scale = 2.01

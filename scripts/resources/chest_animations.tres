@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ccce55xo8l4ki"]
+
+[ext_resource type="Script" path="res://scripts/resources/chest_animations.gd" id="1_kg263"]
+
+[resource]
+script = ExtResource("1_kg263")
