@@ -2,8 +2,9 @@ extends Entity
 
 var player = null
 var home := Vector2.ZERO
-var min_distance := Vector2(1, 20)
+var min_distance := Vector2(1, 15)
 var is_chasing := false
+@onready var detection_area := $detection_area
 
 
 func _on_detection_area_body_entered(body):
@@ -72,14 +73,17 @@ func chase_player(delta):
 	
 
 func go_home(delta):
-	if weapon.is_attacking or weapon.can_attack:
+	if weapon.is_attacking or weapon.can_attack or is_chasing:
 		weapon.is_attacking = false
 		weapon.can_attack = false
-	if position != home:
-		var target_direction = position.direction_to(home)
-		direction = Vector2(sign(target_direction.x), sign(target_direction.y))
-		velocity = target_direction * speed * delta
-		check_animation("walk", false)
-		check_audio("walk", false)
+		is_chasing = false
+		player = null
+	if position.distance_to(home) <= min_distance.length():
+		velocity = Vector2.ZERO
+		check_animation("idle", false)
 		return
-	check_animation("idle", false)
+	var target_direction = position.direction_to(home)
+	direction = Vector2(sign(target_direction.x), sign(target_direction.y))
+	velocity = target_direction * speed * delta
+	check_animation("walk", false)
+	check_audio("walk", false)

@@ -8,13 +8,6 @@
 [ext_resource type="Resource" uid="uid://ceiar88gy4t0c" path="res://scripts/resources/enemy_animations.tres" id="3_wrbni"]
 [ext_resource type="PackedScene" uid="uid://c66nvo4oy2dxe" path="res://scenes/characters/hitbox_component.tscn" id="3_xj7o4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8qnkc"]
-radius = 6.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o5dwd"]
-radius = 6.0
-height = 24.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_81mtx"]
 atlas = ExtResource("1_4x6u3")
 region = Rect2(0, 288, 48, 48)
@@ -412,6 +405,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8qnkc"]
+radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o5dwd"]
+radius = 6.0
+height = 24.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_67nfj"]
 radius = 91.0879
 
@@ -424,6 +424,12 @@ audios = ExtResource("2_cdipg")
 speed = 1000
 animations = ExtResource("3_wrbni")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lsx55")
+animation = &"attack_side"
+frame_progress = 0.0604102
+offset = Vector2(0, -16)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_8qnkc")
@@ -434,6 +440,12 @@ sprite = NodePath("../AnimatedSprite2D")
 
 [node name="weapon" parent="." instance=ExtResource("3_i3hra")]
 cooldown_time = 1.2
+attack_damage = null
+knockback_force = null
+stun_time = 0.2
+
+[node name="hitbox" parent="weapon" index="0"]
+position = Vector2(0, -2)
 
 [node name="hitbox_component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_xj7o4")]
 health_component = NodePath("../health_component")
@@ -442,11 +454,6 @@ health_component = NodePath("../health_component")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_o5dwd")
 debug_color = Color(0.960784, 0.0745098, 0.462745, 0.419608)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_lsx55")
-animation = &"attack_idle"
-offset = Vector2(0, -16)
 
 [node name="detection_area" type="Area2D" parent="."]
 
@@ -461,7 +468,12 @@ debug_color = Color(0.439216, 0.737255, 0.184314, 0.419608)
 
 [node name="sfx2" type="AudioStreamPlayer2D" parent="."]
 
-[connection signal="attack_state_changed" from="weapon" to="." method="_on_weapon_attack_state_changed"]
+[connection signal="attack_finished" from="." to="weapon" method="_on_attack_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="has_died" from="health_component" to="." method="_on_health_component_has_died"]
+[connection signal="attack_state_changed" from="weapon" to="." method="_on_weapon_attack_state_changed"]
+[connection signal="attack_state_changed" from="weapon" to="hitbox_component" method="_on_weapon_attack_state_changed"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+
+[editable path="weapon"]

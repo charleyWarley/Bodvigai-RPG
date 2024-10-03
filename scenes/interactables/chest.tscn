@@ -91,3 +91,5 @@ shape = SubResource("RectangleShape2D_ttqvo")
 [node name="sfx1" type="AudioStreamPlayer2D" parent="."]
 
 [node name="sfx2" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="has_died" from="health_component" to="." method="_on_has_died"]

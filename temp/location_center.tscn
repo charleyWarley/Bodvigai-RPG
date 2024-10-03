@@ -1,21 +1,21 @@
 [gd_scene load_steps=21 format=3]
 
-[ext_resource type="Script" path="res://scripts/location.gd" id="1_urgvc"]
-[ext_resource type="PackedScene" path="res://scenes/characters/enemy.tscn" id="2_gc4o7"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="3_caml4"]
-[ext_resource type="Resource" path="res://scripts/resources/enemy_audios.tres" id="4_njwam"]
-[ext_resource type="Resource" path="res://scripts/resources/enemy_animations.tres" id="5_8m6sl"]
-[ext_resource type="Texture2D" path="res://images/plains.png" id="6_5uuo0"]
-[ext_resource type="Texture2D" path="res://images/objects.png" id="7_v5yu7"]
-[ext_resource type="Texture2D" path="res://images/grass.png" id="8_rj4gw"]
-[ext_resource type="PackedScene" path="res://scenes/interactables/chest.tscn" id="9_pqe65"]
-[ext_resource type="Script" path="res://scripts/chest.gd" id="10_ud50v"]
-[ext_resource type="Resource" path="res://scripts/resources/chest_audios.tres" id="11_4jbc7"]
-[ext_resource type="Resource" path="res://scripts/resources/chest_animations.tres" id="12_pum83"]
-[ext_resource type="Script" path="res://scripts/transition_area.gd" id="13_xmyd6"]
+[ext_resource type="Script" path="res://scripts/location.gd" id="1_2jg8o"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemy.tscn" id="2_uuahn"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="3_k8nr6"]
+[ext_resource type="Resource" path="res://scripts/resources/enemy_audios.tres" id="4_1lul3"]
+[ext_resource type="Resource" path="res://scripts/resources/enemy_animations.tres" id="5_ngge3"]
+[ext_resource type="Texture2D" path="res://images/plains.png" id="6_hgpth"]
+[ext_resource type="Texture2D" path="res://images/objects.png" id="7_wcou4"]
+[ext_resource type="Texture2D" path="res://images/grass.png" id="8_qttuw"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/chest.tscn" id="9_8nljq"]
+[ext_resource type="Script" path="res://scripts/chest.gd" id="10_anmcm"]
+[ext_resource type="Resource" path="res://scripts/resources/chest_audios.tres" id="11_qnq63"]
+[ext_resource type="Resource" path="res://scripts/resources/chest_animations.tres" id="12_ndmcv"]
+[ext_resource type="Script" path="res://scripts/transition_area.gd" id="13_h86nk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ey1l0"]
-texture = ExtResource("6_5uuo0")
+texture = ExtResource("6_hgpth")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -150,7 +150,7 @@ texture = ExtResource("6_5uuo0")
 3:7/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gi7mp"]
-texture = ExtResource("7_v5yu7")
+texture = ExtResource("7_wcou4")
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
 0:5/0/y_sort_origin = 13
@@ -202,7 +202,7 @@ texture = ExtResource("7_v5yu7")
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.15118, -0.793701, 5.95275, -0.793701, 5.75433, 5.95275, -5.75433, 5.75433, -8, 2.18268)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fb04b"]
-texture = ExtResource("8_rj4gw")
+texture = ExtResource("8_qttuw")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -224,7 +224,7 @@ size = Vector2(88, 42)
 
 [node name="location_center" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_urgvc")
+script = ExtResource("1_2jg8o")
 left_limit = -397
 right_limit = 41
 top_limit = -97
@@ -233,60 +233,59 @@ bottom_limit = 239
 [node name="start_position" type="Node2D" parent="."]
 position = Vector2(-167, 160)
 
-[node name="enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_gc4o7")]
+[node name="enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_uuahn")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-290.41, 136.159)
-velocity = Vector2(-5.79813, -15.6256)
-script = ExtResource("3_caml4")
+position = Vector2(-291.265, 174.283)
+script = ExtResource("3_k8nr6")
 weapon = NodePath("weapon")
-audios = ExtResource("4_njwam")
+audios = ExtResource("4_1lul3")
 speed = 1000
-animations = ExtResource("5_8m6sl")
+animations = ExtResource("5_ngge3")
 
-[node name="enemy5" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_gc4o7")]
+[node name="enemy5" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_uuahn")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-331.545, -29.2598)
-velocity = Vector2(9.70848, -13.5471)
-script = ExtResource("3_caml4")
+position = Vector2(-348.54, -38.3439)
+velocity = Vector2(13.9382, -9.13813)
+script = ExtResource("3_k8nr6")
 weapon = NodePath("weapon")
-audios = ExtResource("4_njwam")
+audios = ExtResource("4_1lul3")
 speed = 1000
-animations = ExtResource("5_8m6sl")
+animations = ExtResource("5_ngge3")
 
-[node name="enemy2" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_gc4o7")]
+[node name="enemy2" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_uuahn")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-196.19, -4.9714)
-velocity = Vector2(0, -2.20154)
-script = ExtResource("3_caml4")
+position = Vector2(-231.244, -34.9534)
+velocity = Vector2(-11.3976, -12.1603)
+script = ExtResource("3_k8nr6")
 weapon = NodePath("weapon")
-audios = ExtResource("4_njwam")
+audios = ExtResource("4_1lul3")
 speed = 1000
-animations = ExtResource("5_8m6sl")
+animations = ExtResource("5_ngge3")
 
-[node name="enemy3" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_gc4o7")]
+[node name="enemy3" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_uuahn")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-305.072, -20.9476)
-velocity = Vector2(3.46457, -16.3026)
-script = ExtResource("3_caml4")
+position = Vector2(-265.856, -42.3224)
+velocity = Vector2(-4.54249, -16.0357)
+script = ExtResource("3_k8nr6")
 weapon = NodePath("weapon")
-audios = ExtResource("4_njwam")
+audios = ExtResource("4_1lul3")
 speed = 1000
-animations = ExtResource("5_8m6sl")
+animations = ExtResource("5_ngge3")
 
-[node name="enemy4" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_gc4o7")]
+[node name="enemy4" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_uuahn")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-309.945, -35.8407)
-velocity = Vector2(5.85376, -15.6048)
-script = ExtResource("3_caml4")
+position = Vector2(-310.045, -74.7152)
+velocity = Vector2(15.9204, -4.93131)
+script = ExtResource("3_k8nr6")
 weapon = NodePath("weapon")
-audios = ExtResource("4_njwam")
+audios = ExtResource("4_1lul3")
 speed = 1000
-animations = ExtResource("5_8m6sl")
+animations = ExtResource("5_ngge3")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -303,19 +302,19 @@ layer_2/y_sort_enabled = true
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array(-589816, 2, 5, -655356, 2, 5, -393208, 2, 5, -458746, 2, 5, -720896, 2, 5, -655368, 2, 5, -655364, 2, 5, 9, 2, 5, 327689, 2, 5, 655369, 2, 5, -196603, 524290, 6, 3, 524290, 6, -458751, 524290, 6, -327682, 524290, 6, -458758, 524290, 6, 327679, 524290, 6, 262127, 393218, 7, -65547, 393218, 7, -196608, 655362, 7, 655352, 2, 1, 589827, 2, 0, 458755, 655362, 7, 720898, 393218, 7, 786432, 393218, 7, 851966, 393218, 7, 851964, 393218, 7, 851962, 393218, 7, 851960, 393218, 7, 786422, 2, 5, 851956, 2, 5, 786418, 2, 5, 851952, 2, 5, 786414, 2, 5, 851948, 2, 5, 786411, 393218, 7, 655339, 393218, 7, 327660, 655362, 7, 262123, 655362, 7, 458731, 655362, 7, 589803, 655362, 7, 131051, 655362, 7, 65516, 655362, 7, -65556, 655362, 7)
 
-[node name="chest" type="StaticBody2D" parent="." groups=["attackable", "chests", "objects"] instance=ExtResource("9_pqe65")]
+[node name="chest" type="StaticBody2D" parent="." groups=["attackable", "chests", "objects"] instance=ExtResource("9_8nljq")]
 z_index = 1
 position = Vector2(-68, 26)
-script = ExtResource("10_ud50v")
-audios = ExtResource("11_4jbc7")
-animations = ExtResource("12_pum83")
+script = ExtResource("10_anmcm")
+audios = ExtResource("11_qnq63")
+animations = ExtResource("12_ndmcv")
 
-[node name="chest2" type="StaticBody2D" parent="." groups=["attackable", "chests", "objects"] instance=ExtResource("9_pqe65")]
+[node name="chest2" type="StaticBody2D" parent="." groups=["attackable", "chests", "objects"] instance=ExtResource("9_8nljq")]
 z_index = 1
 position = Vector2(5, 163)
-script = ExtResource("10_ud50v")
-audios = ExtResource("11_4jbc7")
-animations = ExtResource("12_pum83")
+script = ExtResource("10_anmcm")
+audios = ExtResource("11_qnq63")
+animations = ExtResource("12_ndmcv")
 
 [node name="boundaries" type="StaticBody2D" parent="."]
 
@@ -324,7 +323,7 @@ z_index = 1
 polygon = PackedVector2Array(57, -82, 79, -89, 81.4383, -169.384, -179.931, -163.241, -488, -156, -504, 331, 166, 303, 137, -127, 96, -79, 54, -74, 28, 2, 23, 218, 41, 215, 40, 232, 45, 271, -27, 269, -26.3721, 238.517, -314.89, 238.894, -314, 281, -366, 279, -366.617, 238.962, -396, 239, -396, 12.071, -477, 11, -479, -99, -403.852, -97.763, -404, -137, -257, -138, -257, -96, -246, -68, -43, -67, -40, -52, -26, -51, -24, -35, -7, -35, -8, -19, 8, -18, 8, 0, 26, 0)
 
 [node name="transition_area" type="Area2D" parent="."]
-script = ExtResource("13_xmyd6")
+script = ExtResource("13_h86nk")
 destination_key = "location_northwest"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="transition_area"]
@@ -337,7 +336,7 @@ shape = SubResource("RectangleShape2D_weksn")
 
 [node name="transition_area2" type="Area2D" parent="."]
 position = Vector2(-336, 225)
-script = ExtResource("13_xmyd6")
+script = ExtResource("13_h86nk")
 destination_key = ""
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="transition_area2"]
@@ -346,11 +345,17 @@ shape = SubResource("RectangleShape2D_enejl")
 
 [node name="transition_area4" type="Area2D" parent="."]
 position = Vector2(-1, 224)
-script = ExtResource("13_xmyd6")
+script = ExtResource("13_h86nk")
 destination_key = ""
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="transition_area4"]
 position = Vector2(15, 35)
 shape = SubResource("RectangleShape2D_enejl")
 
+[connection signal="attack_finished" from="enemy" to="enemy/weapon" method="_on_attack_finished"]
+[connection signal="attack_finished" from="enemy5" to="enemy5/weapon" method="_on_attack_finished"]
+[connection signal="attack_finished" from="enemy2" to="enemy2/weapon" method="_on_attack_finished"]
+[connection signal="attack_finished" from="enemy3" to="enemy3/weapon" method="_on_attack_finished"]
+[connection signal="attack_finished" from="enemy4" to="enemy4/weapon" method="_on_attack_finished"]
 [connection signal="body_entered" from="transition_area" to="transition_area" method="_on_body_entered"]
+[connection signal="attack_finished" from="player" to="player/weapon" method="_on_attack_finished"]

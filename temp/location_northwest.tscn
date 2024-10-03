@@ -1,18 +1,18 @@
 [gd_scene load_steps=17 format=3]
 
-[ext_resource type="Script" path="res://scripts/location.gd" id="1_8j5q8"]
-[ext_resource type="PackedScene" path="res://scenes/characters/enemy.tscn" id="2_xg0gf"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="3_sov1i"]
-[ext_resource type="Resource" path="res://scripts/resources/enemy_audios.tres" id="4_xobtg"]
-[ext_resource type="Resource" path="res://scripts/resources/enemy_animations.tres" id="5_c8ipd"]
-[ext_resource type="PackedScene" path="res://scenes/locations/tile_map.tscn" id="6_xik5j"]
-[ext_resource type="Texture2D" path="res://images/objects.png" id="7_y1puw"]
-[ext_resource type="Texture2D" path="res://images/plains.png" id="8_uipvx"]
-[ext_resource type="Texture2D" path="res://images/grass.png" id="9_nes1f"]
-[ext_resource type="Script" path="res://scripts/transition_area.gd" id="10_yl651"]
+[ext_resource type="Script" path="res://scripts/location.gd" id="1_wghbl"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemy.tscn" id="2_jj2hp"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="3_yb6oi"]
+[ext_resource type="Resource" path="res://scripts/resources/enemy_audios.tres" id="4_llp8n"]
+[ext_resource type="Resource" path="res://scripts/resources/enemy_animations.tres" id="5_pipo0"]
+[ext_resource type="PackedScene" path="res://scenes/locations/tile_map.tscn" id="6_nenst"]
+[ext_resource type="Texture2D" path="res://images/objects.png" id="7_07wki"]
+[ext_resource type="Texture2D" path="res://images/plains.png" id="8_m22hx"]
+[ext_resource type="Texture2D" path="res://images/grass.png" id="9_0lexj"]
+[ext_resource type="Script" path="res://scripts/transition_area.gd" id="10_qcj72"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8s81"]
-texture = ExtResource("7_y1puw")
+texture = ExtResource("7_07wki")
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
 0:5/0/y_sort_origin = 13
@@ -65,7 +65,7 @@ texture = ExtResource("7_y1puw")
 11:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4528o"]
-texture = ExtResource("8_uipvx")
+texture = ExtResource("8_m22hx")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -272,7 +272,7 @@ texture = ExtResource("8_uipvx")
 5:11/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtauw"]
-texture = ExtResource("9_nes1f")
+texture = ExtResource("9_0lexj")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -291,7 +291,7 @@ size = Vector2(52, 119)
 
 [node name="location_northwest" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_8j5q8")
+script = ExtResource("1_wghbl")
 left_limit = -333
 right_limit = 195
 top_limit = -129
@@ -300,18 +300,18 @@ bottom_limit = 174
 [node name="start_position" type="Node2D" parent="."]
 position = Vector2(150, 144)
 
-[node name="enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_xg0gf")]
+[node name="enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("weapon") groups=["attackable", "enemies"] instance=ExtResource("2_jj2hp")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(64.046, 32.6594)
-velocity = Vector2(2.8026e-45, 0)
-script = ExtResource("3_sov1i")
+position = Vector2(-18.7182, 30.1799)
+velocity = Vector2(-16.5518, 1.9536)
+script = ExtResource("3_yb6oi")
 weapon = NodePath("weapon")
-audios = ExtResource("4_xobtg")
+audios = ExtResource("4_llp8n")
 speed = 1000
-animations = ExtResource("5_c8ipd")
+animations = ExtResource("5_pipo0")
 
-[node name="TileMap" type="TileMap" parent="." instance=ExtResource("6_xik5j")]
+[node name="TileMap" type="TileMap" parent="." instance=ExtResource("6_nenst")]
 y_sort_enabled = true
 position = Vector2(-77, 47)
 tile_set = SubResource("TileSet_23ynl")
@@ -333,7 +333,7 @@ visible = false
 polygon = PackedVector2Array(-236, -68, -238, 31, -197, 35, -192, 131, -165, 131, -160, 173, -39, 174, -39, 211, 198, 212, 196, 174, 245, 174, 236, 54, 195.199, 55.4178, 195, 26, 154, 29, 150, -69, -231, -67, -335, -129, 238, -129, 279, 226, -42, 234, -358, 196, -352, -137)
 
 [node name="transition_area" type="Area2D" parent="."]
-script = ExtResource("10_yl651")
+script = ExtResource("10_qcj72")
 destination_key = "location_center"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="transition_area"]

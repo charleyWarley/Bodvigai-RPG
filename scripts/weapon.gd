@@ -14,23 +14,34 @@ var _attack : Attack = null
 @export var knockback_force := 2.0
 @export var stun_time := 1.5
 @onready var cooldown_timer := $cooldown_timer
+@onready var attack_ready_timer := $attack_ready_timer
 @onready var sprite := $"../AnimatedSprite2D"
+
+
+func _on_attack_finished():
+	deal_damage()
+
+
+func _on_attack_ready_timer_timeout():
+	if targets == []: return
+	can_attack = true
 
 
 func _on_hitbox_area_entered(area):
 	#if the area entering can't take damage or is already attacking or is dead or the attacker is dead, exit method
 	if (!area.has_method("take_damage") or 
 	is_attacking or 
-	area.check_health() <= 0 or 
+	area.check_health() <= 0 or
 	!parent.is_alive
-	): 
-		return  
+	): return  
 	#if the target is in the same group as the attacking entity, exit method
 	for group in parent.get_groups(): 
 		if area.get_parent().is_in_group(group): return 
 	#set the area as the target and allow attack attempts
 	targets.append(area)
-	can_attack = true
+	var random_time = randf_range(0.3, 1.2)
+	attack_ready_timer.wait_time = random_time
+	attack_ready_timer.start()
 
 
 func _on_hitbox_area_exited(area): 
@@ -63,11 +74,17 @@ func _process(_delta):
 		return
 	#if the entity, check for input before attempting an attack
 	if parent.name == "player":
-		if Input.is_action_just_pressed("attack"):
+		if Input.is_action_just_pressed("attack") and !is_attacking:
 			attack()
 			return
-		return
-	if can_attack: attack() #if the entity is not the player and the entity can attack, attempt an attack
+	if targets != []:
+		if parent.is_in_group("enemies") and targets[0].check_health() <= 0: 
+			parent.detection_area.monitoring = false
+			parent.is_chasing = false
+			can_attack = false
+			is_attacking = false
+			
+	if can_attack and parent.is_in_group("enemies"): attack() #if the entity is not the player and the entity can attack, attempt an attack
 
 
 func create_attack_node():
@@ -79,7 +96,8 @@ func create_attack_node():
 
 func attack():
 	if ((parent.is_in_group("enemies") and !can_attack) or 
-		(parent.is_in_group("players") and is_attacking)
+		(parent.is_in_group("players") and is_attacking) or 
+		parent.is_stunned
 		): return #if the attacker is an enemy and can't attack, exit method
 	#disallow attack attempts during current attack, start the attack cooldown timer
 	can_attack = false
@@ -88,11 +106,12 @@ func attack():
 	is_attacking = true
 	parent.check_animation("attack", true)
 	emit_signal("attack_state_changed", is_attacking)
+
+func deal_damage():
 	if targets == []: 
 		can_attack = false
 		return #if there is no target, exit method to avoid trying to deal damage to nothing
-	#if the target is dead, clear the target
-	var target_health : int
+	#attack each target
 	for target in targets:
 		if target.take_damage(_attack) <= 0:
 			targets.erase(target)

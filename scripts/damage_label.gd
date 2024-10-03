@@ -19,13 +19,13 @@ func set_damage_label_text(damage: int, note: String = ""):
 	var _text : String
 	if note != "":
 		_text = note
-		shadow.parse_bbcode("[center]" + _text + "[/center]")
 		_text = "[color=BLUE]" + _text + "[/color]"
 	else:
 		_text = str(-damage)
 		if sign(-damage) == 1: _text = "[color=SPRINGGREEN]" + _text + "[/color]"
 		else: _text = "[color=RED]" + _text + "[/color]"
 	_text = "[center]" + _text + "[/center]"
+	shadow.parse_bbcode("[center]" + _text + "[/center]")
 	parse_bbcode(_text)
 
 

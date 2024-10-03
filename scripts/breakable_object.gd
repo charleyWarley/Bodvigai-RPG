@@ -1,11 +1,16 @@
 extends StaticBody2D
 class_name BreakableObject
 
+var is_alive = true
 @export var audios : Resource
 @onready var sfx1 := $sfx1
 @onready var sfx2 := $sfx2
 @onready var sprite := $AnimatedSprite2D
 @export var animations : Resource
+
+
+func _on_has_died():
+	is_alive = false
 
 
 func _ready():
@@ -14,7 +19,6 @@ func _ready():
 
 func check_animation(action: String):
 	#if the animation is already playing, exit method
-	print("checking animation")
 	if action == sprite.animation: return
 	var animation = action
 	if animations.list.has(animation):
@@ -26,6 +30,10 @@ func animate(action: String, animation: String):
 	sprite.play(animation)
 	check_audio(action)
 
+
+########################################
+#####Animation and Audio functions######
+########################################
 
 func check_audio(audio: String):
 	var audio_type = audios.sfxs

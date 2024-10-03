@@ -3,8 +3,15 @@ extends Entity
 var horizontal_input : float
 var vertical_input : float
 
+
+func _on_animated_sprite_2d_animation_finished():
+	if sprite.animation == "die":
+		get_tree().reload_current_scene()
+
+
 func _ready():
 	#set the player variable of the global script Global to self
+	sprite.play("idle_down")
 	Global.player = self
 
 

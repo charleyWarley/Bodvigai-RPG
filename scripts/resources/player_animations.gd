@@ -1,18 +1,15 @@
 extends Resource
 
 var list := [
-	"idle_left",
-	"idle_right",
+	"idle_side",
 	"idle_up",
 	"idle_dowwn",
 	
-	"walk_left",
-	"walk_right",
+	"walk_side",
 	"walk_up",
 	"walk_down",
 	
-	"attack_left",
-	"attack_right",
+	"attack_side",
 	"attack_up",
 	"attack_down",
 	"attack_idle",
